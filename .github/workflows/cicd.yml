@@ -1,0 +1,110 @@
+name: CICD
+
+env:
+  RUST_MIN_VERSION: "1.56.0"
+  CARGO_TERM_COLOR: always
+
+on:
+  push:
+    branches:
+      - main
+    tags:
+      - v*
+
+jobs:
+  check_fmt_and_clipy:
+    name: Check cargo fmt
+    runs-on: ${{ matrix.job.os }}
+    strategy:
+      fail-fast: false
+      matrix:
+        # job: [ { os: ubuntu-latest }, { os: macos-latest }, { os: windows-latest } ]
+        job: [ { os: ubuntu-latest } ]
+    steps:
+    - name: Checkout source code
+      uses: actions/checkout@v2
+
+    - name: Install rust toolchain
+      uses: actions-rs/toolchain@v1
+      with:
+        toolchain: stable
+        profile: default
+        default: true
+
+    - name: Run fmt
+      uses: actions-rs/cargo@v1
+      with:
+        command: fmt
+        args: --all -- --check
+
+    # - name: Run clippy
+    #   if: success() || failure()
+    #   uses: actions-rs/cargo@v1
+    #   with:
+    #     command: clippy
+    #     args: -- -D warnings
+
+  # TODO: min_version
+
+  # TODO: documentation
+
+  test:
+    name: Test
+    needs: [check_fmt_and_clipy]
+    runs-on: ${{ matrix.job.os }}
+    strategy:
+      fail-fast: false
+      matrix:
+        # job: [ { os: ubuntu-latest }, { os: macos-latest }, { os: windows-latest } ]
+        job: [ { os: ubuntu-latest } ]
+    steps:
+    - name: Checkout source code
+      uses: actions/checkout@v2
+
+    - name: Install rust toolchain
+      uses: actions-rs/toolchain@v1
+      with:
+        toolchain: stable
+        profile: default
+        default: true
+
+    - name: Run test
+      uses: actions-rs/cargo@v1
+      with:
+        command: test
+
+  build:
+    name: Build and Publish (${{ matrix.job.os }}-${{ matrix.job.target }})
+    needs: [test]
+    runs-on: ${{ matrix.job.os }}
+    strategy:
+      fail-fast: false
+      matrix:
+        job:
+          - { target: x86_64-unknown-linux-musl   , os: ubuntu-latest, use-cross: true }
+          # - { target: x86_64-apple-darwin , os: macos-latest }
+          # - { target: x86_64-pc-windows-msvc, os: windows-latest }
+    steps:
+    - name: Checkout source code
+      uses: actions/checkout@v2
+
+    - name: Install rust toolchain
+      uses: actions-rs/toolchain@v1
+      with:
+        toolchain: stable
+        profile: default
+        target: ${{ matrix.job.target }}
+        default: true
+
+    - name: Install musl tools
+      if : matrix.job.target == 'x86_64-unknown-linux-musl'
+      run: |
+        sudo apt install -qq -y musl-tools --no-install-recommends
+        sudo apt install -y pkg-config libssl-dev
+
+    - name: Build
+      uses: actions-rs/cargo@v1
+      with:
+        use-cross: ${{ matrix.job.use-cross }}
+        command: build
+        args: --release --target=${{ matrix.job.target }}
