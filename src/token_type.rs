@@ -7,45 +7,44 @@ pub enum TokenType {
     EOF,
 
     /// Synbol Char
-    Ampersand,   // &
-    AtMark,      // @
-    Ast,         // *
-    Bang,        // !
-    Colon,       // :
-    Comma,       // ,
-    DollerSign,  // $
-    DoubleQuote, // "
-    EqOp,        // =
-    EqEqOp             // ==
-    GreaterOp,   // >
-    GraterThanEqOp,             // >=
-    LeftBra,     // [
-    LeftBrace,   // {
-    LeftShiftOp,             // <<
-    LessOp,      // <
-    LessThanEqOp,             // <=
-    Lparen,      // (
-    Minus,       // -
-    NotEqOp             // !=
-    Percent,     // %
-    Period,      // .
-    Plus,        // +
-    Quote,       // '
-    Rparen,      // )
-    RightBra,    // ]
-    RightBrace,  // }
-    RightShiftOp,             // >>
-    SemiColon,   // ;
-    Slash,       // /
-    UnderScore,  // _
-    VerticalBar, // |
+    Ampersand, // &
+    AtMark,         // @
+    Ast,            // *
+    Bang,           // !
+    Colon,          // :
+    Comma,          // ,
+    DollerSign,     // $
+    DoubleQuote,    // "
+    EqOp,           // =
+    EqEqOp,         // ==
+    GreaterOp,      // >
+    GraterThanEqOp, // >=
+    LeftBra,        // [
+    LeftBrace,      // {
+    LeftShiftOp,    // <<
+    LessOp,         // <
+    LessThanEqOp,   // <=
+    Lparen,         // (
+    Minus,          // -
+    NotEqOp,        // !=
+    Percent,        // %
+    Period,         // .
+    Plus,           // +
+    Quote,          // '
+    Rparen,         // )
+    RightBra,       // ]
+    RightBrace,     // }
+    RightShiftOp,   // >>
+    SemiColon,      // ;
+    Slash,          // /
+    UnderScore,     // _
+    VerticalBar,    // |
 
     /// Literal
     Ident(String), // a~z, A~Z, 0~ 9
     Number(i64), // 0 ~ 9
     Bool(bool),  // true or false
     // TODO: Float(f64),  // float
-
     /// Referenced pingcap/parser
     /// https://github.com/pingcap/parser/blob/master/parser.y
     ///
