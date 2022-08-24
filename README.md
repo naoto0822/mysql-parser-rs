@@ -8,6 +8,15 @@
 
 ## Features
 
+### DDL
+
+> TODO
+
+### DML
+
+|  Statement  |  Support  |
+| ---- | ---- |
+|  SELECT  | :x: or :white_check_mark: |
 
 ## TODO
 
