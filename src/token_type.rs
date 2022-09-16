@@ -1,5 +1,8 @@
+use strum::IntoEnumIterator;
+use strum_macros::EnumIter;
+
 /// TokenType represents token
-#[derive(Clone, Debug, Eq, Hash, PartialEq)]
+#[derive(Clone, Debug, Eq, EnumIter, Hash, PartialEq)]
 pub enum TokenType {
     /// System
     StartToken,
@@ -42,9 +45,9 @@ pub enum TokenType {
 
     /// Literal
     Ident(String), // a~z, A~Z, 0~ 9
-    Number(i64), // 0 ~ 9
-    Bool(bool),  // true or false
-    // TODO: Float(f64),  // float
+    NumberType(i64), // 0 ~ 9
+    BoolTYpe(bool),  // true or false
+
     /// Referenced pingcap/parser
     /// https://github.com/pingcap/parser/blob/master/parser.y
     ///
@@ -57,9 +60,9 @@ pub enum TokenType {
     As,                // "AS"
     Asc,               // "ASC"
     Between,           // "BETWEEN"
-    BigIntType,        // "BIGINT"
-    BinaryType,        // "BINARY"
-    BlobType,          // "BLOB"
+    BigInt,            // "BIGINT"
+    Binary,            // "BINARY"
+    Blob,              // "BLOB"
     Both,              // "BOTH"
     By,                // "BY"
     Call,              // "CALL"
@@ -67,7 +70,7 @@ pub enum TokenType {
     CaseKwd,           // "CASE"
     Change,            // "CHANGE"
     Character,         // "CHARACTER"
-    CharType,          // "CHAR"
+    Char,              // "CHAR"
     Check,             // "CHECK"
     Collate,           // "COLLATE"
     Column,            // "COLUMN"
@@ -87,7 +90,7 @@ pub enum TokenType {
     DayMicrosecond,    // "DAY_MICROSECOND"
     DayMinute,         // "DAY_MINUTE"
     DaySecond,         // "DAY_SECOND"
-    DecimalType,       // "DECIMAL"
+    Decimal,           // "DECIMAL"
     DefaultKwd,        // "DEFAULT"
     Delayed,           // "DELAYED"
     DeleteKwd,         // "DELETE"
@@ -97,7 +100,7 @@ pub enum TokenType {
     Distinct,          // "DISTINCT"
     DistinctRow,       // "DISTINCTROW"
     Div,               // "DIV"
-    DoubleType,        // "DOUBLE"
+    Double,            // "DOUBLE"
     Drop,              // "DROP"
     Dual,              // "DUAL"
     ElseKwd,           // "ELSE"
@@ -109,7 +112,7 @@ pub enum TokenType {
     FalseKwd,          // "FALSE"
     Fetch,             // "FETCH"
     FirstValue,        // "FIRST_VALUE"
-    FloatType,         // "FLOAT"
+    Float,             // "FLOAT"
     ForKwd,            // "FOR"
     Force,             // "FORCE"
     Foreign,           // "FOREIGN"
@@ -130,19 +133,19 @@ pub enum TokenType {
     Index,             // "INDEX"
     Infile,            // "INFILE"
     Inner,             // "INNER"
-    IntegerType,       // "INTEGER"
+    Integer,           // "INTEGER"
     Intersect,         // "INTERSECT"
     Interval,          // "INTERVAL"
     Into,              // "INTO"
     Outfile,           // "OUTFILE"
     Is,                // "IS"
     Insert,            // "INSERT"
-    IntType,           // "INT"
-    Int1Type,          // "INT1"
-    Int2Type,          // "INT2"
-    Int3Type,          // "INT3"
-    Int4Type,          // "INT4"
-    Int8Type,          // "INT8"
+    Int,               // "INT"
+    Int1,              // "INT1"
+    Int2,              // "INT2"
+    Int3,              // "INT3"
+    Int4,              // "INT4"
+    Int8,              // "INT8"
     Join,              // "JOIN"
     Key,               // "KEY"
     Keys,              // "KEYS"
@@ -160,14 +163,14 @@ pub enum TokenType {
     LocalTime,         // "LOCALTIME"
     LocalTs,           // "LOCALTIMESTAMP"
     Lock,              // "LOCK"
-    LongblobType,      // "LONGBLOB"
-    LongtextType,      // "LONGTEXT"
+    Longblob,          // "LONGBLOB"
+    Longtext,          // "LONGTEXT"
     LowPriority,       // "LOW_PRIORITY"
     Match,             // "MATCH"
     MaxValue,          // "MAXVALUE"
-    MediumblobType,    // "MEDIUMBLOB"
-    MediumIntType,     // "MEDIUMINT"
-    MediumtextType,    // "MEDIUMTEXT"
+    Mediumblob,        // "MEDIUMBLOB"
+    MediumInt,         // "MEDIUMINT"
+    Mediumtext,        // "MEDIUMTEXT"
     MinuteMicrosecond, // "MINUTE_MICROSECOND"
     MinuteSecond,      // "MINUTE_SECOND"
     Mod,               // "MOD"
@@ -176,7 +179,7 @@ pub enum TokenType {
     NthValue,          // "NTH_VALUE"
     Ntile,             // "NTILE"
     Null,              // "NULL"
-    NumericType,       // "NUMERIC"
+    Numeric,           // "NUMERIC"
     Of,                // "OF"
     On,                // "ON"
     Optimize,          // "OPTIMIZE"
@@ -188,13 +191,13 @@ pub enum TokenType {
     Over,              // "OVER"
     Partition,         // "PARTITION"
     PercentRank,       // "PERCENT_RANK"
-    PrecisionType,     // "PRECISION"
+    Precision,         // "PRECISION"
     Primary,           // "PRIMARY"
     Procedure,         // "PROCEDURE"
     RangeKwd,          // "RANGE"
     Rank,              // "RANK"
     Read,              // "READ"
-    RealType,          // "REAL"
+    Real,              // "REAL"
     Recursive,         // "RECURSIVE"
     References,        // "REFERENCES"
     RegexpKwd,         // "REGEXP"
@@ -214,7 +217,7 @@ pub enum TokenType {
     SelectKwd,         // "SELECT"
     Set,               // "SET"
     Show,              // "SHOW"
-    SmallIntType,      // "SMALLINT"
+    SmallInt,          // "SMALLINT"
     Spatial,           // "SPATIAL"
     Sql,               // "SQL"
     SqlBigResult,      // "SQL_BIG_RESULT"
@@ -229,9 +232,9 @@ pub enum TokenType {
     Stored,            // "STORED"
     Terminated,        // "TERMINATED"
     Then,              // "THEN"
-    TinyblobType,      // "TINYBLOB"
-    TinyIntType,       // "TINYINT"
-    TinytextType,      // "TINYTEXT"
+    Tinyblob,          // "TINYBLOB"
+    TinyInt,           // "TINYINT"
+    Tinytext,          // "TINYTEXT"
     To,                // "TO"
     Trailing,          // "TRAILING"
     Trigger,           // "TRIGGER"
@@ -249,9 +252,9 @@ pub enum TokenType {
     UtcTime,           // "UTC_TIME"
     Values,            // "VALUES"
     Long,              // "LONG"
-    VarcharType,       // "VARCHAR"
+    Varchar,           // "VARCHAR"
     Varcharacter,      // "VARCHARACTER"
-    VarbinaryType,     // "VARBINARY"
+    Varbinary,         // "VARBINARY"
     Varying,           // "VARYING"
     Virtual,           // "VIRTUAL"
     When,              // "WHEN"
@@ -290,12 +293,12 @@ pub enum TokenType {
     Binding,               // "BINDING"
     Bindings,              // "BINDINGS"
     Binlog,                // "BINLOG"
-    BitType,               // "BIT"
+    Bit,                   // "BIT"
     Block,                 // "BLOCK"
-    BooleanType,           // "BOOLEAN"
-    BoolType,              // "BOOL"
+    Boolean,               // "BOOLEAN"
+    Bool,                  // "BOOL"
     Btree,                 // "BTREE"
-    ByteType,              // "BYTE"
+    Byte,                  // "BYTE"
     Cache,                 // "CACHE"
     Capture,               // "CAPTURE"
     Cascaded,              // "CASCADED"
@@ -336,8 +339,8 @@ pub enum TokenType {
     Clustered,             // "CLUSTERED"
     Cycle,                 // "CYCLE"
     Data,                  // "DATA"
-    DatetimeType,          // "DATETIME"
-    DateType,              // "DATE"
+    Datetime,              // "DATETIME"
+    Date,                  // "DATE"
     Day,                   // "DAY"
     Deallocate,            // "DEALLOCATE"
     Definer,               // "DEFINER"
@@ -401,7 +404,7 @@ pub enum TokenType {
     Ipc,                   // "IPC"
     Isolation,             // "ISOLATION"
     Issuer,                // "ISSUER"
-    JsonType,              // "JSON"
+    Json,                  // "JSON"
     KeyBlockSize,          // "KEY_BLOCK_SIZE"
     Labels,                // "LABELS"
     Language,              // "LANGUAGE"
@@ -435,7 +438,7 @@ pub enum TokenType {
     Month,                 // "MONTH"
     Names,                 // "NAMES"
     National,              // "NATIONAL"
-    NcharType,             // "NCHAR"
+    Nchar,                 // "NCHAR"
     Never,                 // "NEVER"
     Next,                  // "NEXT"
     Nextval,               // "NEXTVAL"
@@ -446,9 +449,9 @@ pub enum TokenType {
     Nomaxvalue,            // "NOMAXVALUE"
     Nominvalue,            // "NOMINVALUE"
     Nonclustered,          // "NONCLUSTERED"
-    None,                  // "NONE"
+    NoneType,              // "NONE"
     Nowait,                // "NOWAIT"
-    NvarcharType,          // "NVARCHAR"
+    Nvarchar,              // "NVARCHAR"
     Nulls,                 // "NULLS"
     Off,                   // "OFF"
     Offset,                // "OFFSET"
@@ -464,10 +467,9 @@ pub enum TokenType {
     Partitioning,          // "PARTITIONING"
     Partitions,            // "PARTITIONS"
     Password,              // "PASSWORD"
-    // TODO: Percent,               // "PERCENT"
-    PerDB,    // "PER_DB"
-    PerTable, // "PER_TABLE"
-    PipesAsOr,
+    PercentType,           // "PERCENT"
+    PerDB,                 // "PER_DB"
+    PerTable,              // "PER_TABLE"
     Plugins,               // "PLUGINS"
     Policy,                // "POLICY"
     PreSplitRegions,       // "PRE_SPLIT_REGIONS"
@@ -534,7 +536,7 @@ pub enum TokenType {
     Slave,                 // "SLAVE"
     Slow,                  // "SLOW"
     Snapshot,              // "SNAPSHOT"
-    Some,                  // "SOME"
+    SomeType,              // "SOME"
     Source,                // "SOURCE"
     SqlBufferResult,       // "SQL_BUFFER_RESULT"
     SqlCache,              // "SQL_CACHE"
@@ -567,11 +569,11 @@ pub enum TokenType {
     Tablespace,            // "TABLESPACE"
     Temporary,             // "TEMPORARY"
     Temptable,             // "TEMPTABLE"
-    TextType,              // "TEXT"
+    Text,                  // "TEXT"
     Than,                  // "THAN"
     TikvImporter,          // "TIKV_IMPORTER"
-    TimestampType,         // "TIMESTAMP"
-    TimeType,              // "TIME"
+    Timestamp,             // "TIMESTAMP"
+    Time,                  // "TIME"
     Tp,                    // "TYPE"
     Trace,                 // "TRACE"
     Traditional,           // "TRADITIONAL"
@@ -594,7 +596,7 @@ pub enum TokenType {
     WeightString,          // "WEIGHT_STRING"
     Without,               // "WITHOUT"
     X509,                  // "X509"
-    YearType,              // "YEAR"
+    Year,                  // "YEAR"
     Wait,                  // "WAIT"
 
     /* The following tokens belong to NotKeywordToken. Notice: make sure these tokens are contained in NotKeywordToken. */
@@ -605,14 +607,14 @@ pub enum TokenType {
     BitOr,                 //"BIT_OR"
     BitXor,                //"BIT_XOR"
     Bound,                 //"BOUND"
-    BriefType,             //"BRIEF"
+    Brief,                 //"BRIEF"
     Cast,                  //"CAST"
     CopyKwd,               //"COPY"
     Constraints,           //"CONSTRAINTS"
     CurTime,               //"CURTIME"
     DateAdd,               //"DATE_ADD"
     DateSub,               //"DATE_SUB"
-    DotType,               //"DOT"
+    Dot,                   //"DOT"
     Dump,                  //"DUMP"
     Exact,                 //"EXACT"
     ExprPushdownBlacklist, //"EXPR_PUSHDOWN_BLACKLIST"
@@ -674,8 +676,639 @@ pub enum TokenType {
     Variance,              //"VARIANCE"
     VarPop,                //"VAR_POP"
     VarSamp,               //"VAR_SAMP"
-    VerboseType,           //"VERBOSE"
+    Verbose,               //"VERBOSE"
     Voter,                 //"VOTER"
     VoterConstraints,      //"VOTER_CONSTRAINTS"
     Voters,                //"VOTERS"
+}
+
+/// for tools/token_type_to_map_syntax.rs
+pub fn str_for_tool_map_syntax(token_type: &TokenType) -> &str {
+    match token_type {
+        TokenType::Add => "ADD",
+        TokenType::All => "ALL",
+        TokenType::Alter => "ALTER",
+        TokenType::Analyze => "ANALYZE",
+        TokenType::And => "AND",
+        TokenType::As => "AS",
+        TokenType::Asc => "ASC",
+        TokenType::Between => "BETWEEN",
+        TokenType::BigInt => "BIGINT",
+        TokenType::Binary => "BINARY",
+        TokenType::Blob => "BLOB",
+        TokenType::Both => "BOTH",
+        TokenType::By => "BY",
+        TokenType::Call => "CALL",
+        TokenType::Cascade => "CASCADE",
+        TokenType::CaseKwd => "CASE",
+        TokenType::Change => "CHANGE",
+        TokenType::Character => "CHARACTER",
+        TokenType::Char => "CHAR",
+        TokenType::Check => "CHECK",
+        TokenType::Collate => "COLLATE",
+        TokenType::Column => "COLUMN",
+        TokenType::Constraint => "CONSTRAINT",
+        TokenType::Convert => "CONVERT",
+        TokenType::Create => "CREATE",
+        TokenType::Cross => "CROSS",
+        TokenType::CumeDist => "CUME_DIST",
+        TokenType::CurrentDate => "CURRENT_DATE",
+        TokenType::CurrentTime => "CURRENT_TIME",
+        TokenType::CurrentTs => "CURRENT_TIMESTAMP",
+        TokenType::CurrentUser => "CURRENT_USER",
+        TokenType::CurrentRole => "CURRENT_ROLE",
+        TokenType::Database => "DATABASE",
+        TokenType::Databases => "DATABASES",
+        TokenType::DayHour => "DAY_HOUR",
+        TokenType::DayMicrosecond => "DAY_MICROSECOND",
+        TokenType::DayMinute => "DAY_MINUTE",
+        TokenType::DaySecond => "DAY_SECOND",
+        TokenType::Decimal => "DECIMAL",
+        TokenType::DefaultKwd => "DEFAULT",
+        TokenType::Delayed => "DELAYED",
+        TokenType::DeleteKwd => "DELETE",
+        TokenType::DenseRank => "DENSE_RANK",
+        TokenType::Desc => "DESC",
+        TokenType::Describe => "DESCRIBE",
+        TokenType::Distinct => "DISTINCT",
+        TokenType::DistinctRow => "DISTINCTROW",
+        TokenType::Div => "DIV",
+        TokenType::Double => "DOUBLE",
+        TokenType::Drop => "DROP",
+        TokenType::Dual => "DUAL",
+        TokenType::ElseKwd => "ELSE",
+        TokenType::Enclosed => "ENCLOSED",
+        TokenType::Escaped => "ESCAPED",
+        TokenType::Exists => "EXISTS",
+        TokenType::Explain => "EXPLAIN",
+        TokenType::Except => "EXCEPT",
+        TokenType::FalseKwd => "FALSE",
+        TokenType::Fetch => "FETCH",
+        TokenType::FirstValue => "FIRST_VALUE",
+        TokenType::Float => "FLOAT",
+        TokenType::ForKwd => "FOR",
+        TokenType::Force => "FORCE",
+        TokenType::Foreign => "FOREIGN",
+        TokenType::From => "FROM",
+        TokenType::Fulltext => "FULLTEXT",
+        TokenType::Generated => "GENERATED",
+        TokenType::Grant => "GRANT",
+        TokenType::Group => "GROUP",
+        TokenType::Groups => "GROUPS",
+        TokenType::Having => "HAVING",
+        TokenType::HighPriority => "HIGH_PRIORITY",
+        TokenType::HourMicrosecond => "HOUR_MICROSECOND",
+        TokenType::HourMinute => "HOUR_MINUTE",
+        TokenType::HourSecond => "HOUR_SECOND",
+        TokenType::IfKwd => "IF",
+        TokenType::Ignore => "IGNORE",
+        TokenType::In => "IN",
+        TokenType::Index => "INDEX",
+        TokenType::Infile => "INFILE",
+        TokenType::Inner => "INNER",
+        TokenType::Integer => "INTEGER",
+        TokenType::Intersect => "INTERSECT",
+        TokenType::Interval => "INTERVAL",
+        TokenType::Into => "INTO",
+        TokenType::Outfile => "OUTFILE",
+        TokenType::Is => "IS",
+        TokenType::Insert => "INSERT",
+        TokenType::Int => "INT",
+        TokenType::Int1 => "INT1",
+        TokenType::Int2 => "INT2",
+        TokenType::Int3 => "INT3",
+        TokenType::Int4 => "INT4",
+        TokenType::Int8 => "INT8",
+        TokenType::Join => "JOIN",
+        TokenType::Key => "KEY",
+        TokenType::Keys => "KEYS",
+        TokenType::Kill => "KILL",
+        TokenType::Lag => "LAG",
+        TokenType::LastValue => "LAST_VALUE",
+        TokenType::Lead => "LEAD",
+        TokenType::Leading => "LEADING",
+        TokenType::Left => "LEFT",
+        TokenType::Like => "LIKE",
+        TokenType::Limit => "LIMIT",
+        TokenType::Lines => "LINES",
+        TokenType::Linear => "LINEAR",
+        TokenType::Load => "LOAD",
+        TokenType::LocalTime => "LOCALTIME",
+        TokenType::LocalTs => "LOCALTIMESTAMP",
+        TokenType::Lock => "LOCK",
+        TokenType::Longblob => "LONGBLOB",
+        TokenType::Longtext => "LONGTEXT",
+        TokenType::LowPriority => "LOW_PRIORITY",
+        TokenType::Match => "MATCH",
+        TokenType::MaxValue => "MAXVALUE",
+        TokenType::Mediumblob => "MEDIUMBLOB",
+        TokenType::MediumInt => "MEDIUMINT",
+        TokenType::Mediumtext => "MEDIUMTEXT",
+        TokenType::MinuteMicrosecond => "MINUTE_MICROSECOND",
+        TokenType::MinuteSecond => "MINUTE_SECOND",
+        TokenType::Mod => "MOD",
+        TokenType::Not => "NOT",
+        TokenType::NoWriteToBinLog => "NO_WRITE_TO_BINLOG",
+        TokenType::NthValue => "NTH_VALUE",
+        TokenType::Ntile => "NTILE",
+        TokenType::Null => "NULL",
+        TokenType::Numeric => "NUMERIC",
+        TokenType::Of => "OF",
+        TokenType::On => "ON",
+        TokenType::Optimize => "OPTIMIZE",
+        TokenType::Option => "OPTION",
+        TokenType::Optionally => "OPTIONALLY",
+        TokenType::Or => "OR",
+        TokenType::Order => "ORDER",
+        TokenType::Outer => "OUTER",
+        TokenType::Over => "OVER",
+        TokenType::Partition => "PARTITION",
+        TokenType::PercentRank => "PERCENT_RANK",
+        TokenType::Precision => "PRECISION",
+        TokenType::Primary => "PRIMARY",
+        TokenType::Procedure => "PROCEDURE",
+        TokenType::RangeKwd => "RANGE",
+        TokenType::Rank => "RANK",
+        TokenType::Read => "READ",
+        TokenType::Real => "REAL",
+        TokenType::Recursive => "RECURSIVE",
+        TokenType::References => "REFERENCES",
+        TokenType::RegexpKwd => "REGEXP",
+        TokenType::Release => "RELEASE",
+        TokenType::Rename => "RENAME",
+        TokenType::Repeat => "REPEAT",
+        TokenType::Replace => "REPLACE",
+        TokenType::Require => "REQUIRE",
+        TokenType::Restrict => "RESTRICT",
+        TokenType::Revoke => "REVOKE",
+        TokenType::Right => "RIGHT",
+        TokenType::Rlike => "RLIKE",
+        TokenType::Row => "ROW",
+        TokenType::Rows => "ROWS",
+        TokenType::RowNumber => "ROW_NUMBER",
+        TokenType::SecondMicrosecond => "SECOND_MICROSECOND",
+        TokenType::SelectKwd => "SELECT",
+        TokenType::Set => "SET",
+        TokenType::Show => "SHOW",
+        TokenType::SmallInt => "SMALLINT",
+        TokenType::Spatial => "SPATIAL",
+        TokenType::Sql => "SQL",
+        TokenType::SqlBigResult => "SQL_BIG_RESULT",
+        TokenType::SqlCalcFoundRows => "SQL_CALC_FOUND_ROWS",
+        TokenType::SqlSmallResult => "SQL_SMALL_RESULT",
+        TokenType::Ssl => "SSL",
+        TokenType::Starting => "STARTING",
+        TokenType::StatsExtended => "STATS_EXTENDED",
+        TokenType::StraightJoin => "STRAIGHT_JOIN",
+        TokenType::TableKwd => "TABLE",
+        TokenType::TableSample => "TABLESAMPLE",
+        TokenType::Stored => "STORED",
+        TokenType::Terminated => "TERMINATED",
+        TokenType::Then => "THEN",
+        TokenType::Tinyblob => "TINYBLOB",
+        TokenType::TinyInt => "TINYINT",
+        TokenType::Tinytext => "TINYTEXT",
+        TokenType::To => "TO",
+        TokenType::Trailing => "TRAILING",
+        TokenType::Trigger => "TRIGGER",
+        TokenType::TrueKwd => "TRUE",
+        TokenType::Unique => "UNIQUE",
+        TokenType::Union => "UNION",
+        TokenType::Unlock => "UNLOCK",
+        TokenType::Unsigned => "UNSIGNED",
+        TokenType::Update => "UPDATE",
+        TokenType::Usage => "USAGE",
+        TokenType::Use => "USE",
+        TokenType::Using => "USING",
+        TokenType::UtcDate => "UTC_DATE",
+        TokenType::UtcTimestamp => "UTC_TIMESTAMP",
+        TokenType::UtcTime => "UTC_TIME",
+        TokenType::Values => "VALUES",
+        TokenType::Long => "LONG",
+        TokenType::Varchar => "VARCHAR",
+        TokenType::Varcharacter => "VARCHARACTER",
+        TokenType::Varbinary => "VARBINARY",
+        TokenType::Varying => "VARYING",
+        TokenType::Virtual => "VIRTUAL",
+        TokenType::When => "WHEN",
+        TokenType::Where => "WHERE",
+        TokenType::Write => "WRITE",
+        TokenType::Window => "WINDOW",
+        TokenType::With => "WITH",
+        TokenType::Xor => "XOR",
+        TokenType::YearMonth => "YEAR_MONTH",
+        TokenType::Zerofill => "ZEROFILL",
+        TokenType::Natural => "NATURAL",
+        TokenType::Account => "ACCOUNT",
+        TokenType::Action => "ACTION",
+        TokenType::Advise => "ADVISE",
+        TokenType::After => "AFTER",
+        TokenType::Against => "AGAINST",
+        TokenType::Ago => "AGO",
+        TokenType::Algorithm => "ALGORITHM",
+        TokenType::Always => "ALWAYS",
+        TokenType::Any => "ANY",
+        TokenType::Ascii => "ASCII",
+        TokenType::Attributes => "ATTRIBUTES",
+        TokenType::AutoIdCache => "AUTO_ID_CACHE",
+        TokenType::AutoIncrement => "AUTO_INCREMENT",
+        TokenType::AutoRandom => "AUTO_RANDOM",
+        TokenType::AutoRandomBase => "AUTO_RANDOM_BASE",
+        TokenType::Avg => "AVG",
+        TokenType::AvgRowLength => "AVG_ROW_LENGTH",
+        TokenType::Backend => "BACKEND",
+        TokenType::Backup => "BACKUP",
+        TokenType::Backups => "BACKUPS",
+        TokenType::Begin => "BEGIN",
+        TokenType::Bernoulli => "BERNOULLI",
+        TokenType::Binding => "BINDING",
+        TokenType::Bindings => "BINDINGS",
+        TokenType::Binlog => "BINLOG",
+        TokenType::Bit => "BIT",
+        TokenType::Block => "BLOCK",
+        TokenType::Boolean => "BOOLEAN",
+        TokenType::Bool => "BOOL",
+        TokenType::Btree => "BTREE",
+        TokenType::Byte => "BYTE",
+        TokenType::Cache => "CACHE",
+        TokenType::Capture => "CAPTURE",
+        TokenType::Cascaded => "CASCADED",
+        TokenType::Causal => "CAUSAL",
+        TokenType::Chain => "CHAIN",
+        TokenType::CharsetKwd => "CHARSET",
+        TokenType::Checkpoint => "CHECKPOINT",
+        TokenType::Checksum => "CHECKSUM",
+        TokenType::Cipher => "CIPHER",
+        TokenType::Cleanup => "CLEANUP",
+        TokenType::Client => "CLIENT",
+        TokenType::ClientErrorsSummary => "CLIENT_ERRORS_SUMMARY",
+        TokenType::Coalesce => "COALESCE",
+        TokenType::Collation => "COLLATION",
+        TokenType::ColumnFormat => "COLUMN_FORMAT",
+        TokenType::Columns => "COLUMNS",
+        TokenType::Config => "CONFIG",
+        TokenType::Comment => "COMMENT",
+        TokenType::Commit => "COMMIT",
+        TokenType::Committed => "COMMITTED",
+        TokenType::Compact => "COMPACT",
+        TokenType::Compressed => "COMPRESSED",
+        TokenType::Compression => "COMPRESSION",
+        TokenType::Concurrency => "CONCURRENCY",
+        TokenType::Connection => "CONNECTION",
+        TokenType::Consistency => "CONSISTENCY",
+        TokenType::Consistent => "CONSISTENT",
+        TokenType::Context => "CONTEXT",
+        TokenType::Cpu => "CPU",
+        TokenType::CsvBackslashEscape => "CSV_BACKSLASH_ESCAPE",
+        TokenType::CsvDelimiter => "CSV_DELIMITER",
+        TokenType::CsvHeader => "CSV_HEADER",
+        TokenType::CsvNotNull => "CSV_NOT_NULL",
+        TokenType::CsvNull => "CSV_NULL",
+        TokenType::CsvSeparator => "CSV_SEPARATOR",
+        TokenType::CsvTrimLastSeparators => "CSV_TRIM_LAST_SEPARATORS",
+        TokenType::Current => "CURRENT",
+        TokenType::Clustered => "CLUSTERED",
+        TokenType::Cycle => "CYCLE",
+        TokenType::Data => "DATA",
+        TokenType::Datetime => "DATETIME",
+        TokenType::Date => "DATE",
+        TokenType::Day => "DAY",
+        TokenType::Deallocate => "DEALLOCATE",
+        TokenType::Definer => "DEFINER",
+        TokenType::DelayKeyWrite => "DELAY_KEY_WRITE",
+        TokenType::Directory => "DIRECTORY",
+        TokenType::Disable => "DISABLE",
+        TokenType::Discard => "DISCARD",
+        TokenType::Disk => "DISK",
+        TokenType::Do => "DO",
+        TokenType::Duplicate => "DUPLICATE",
+        TokenType::Dynamic => "DYNAMIC",
+        TokenType::Enable => "ENABLE",
+        TokenType::Encryption => "ENCRYPTION",
+        TokenType::End => "END",
+        TokenType::Enforced => "ENFORCED",
+        TokenType::Engine => "ENGINE",
+        TokenType::Engines => "ENGINES",
+        TokenType::Enum => "ENUM",
+        TokenType::ErrorKwd => "ERROR",
+        TokenType::Escape => "ESCAPE",
+        TokenType::Event => "EVENT",
+        TokenType::Events => "EVENTS",
+        TokenType::Evolve => "EVOLVE",
+        TokenType::Exchange => "EXCHANGE",
+        TokenType::Exclusive => "EXCLUSIVE",
+        TokenType::Execute => "EXECUTE",
+        TokenType::Expansion => "EXPANSION",
+        TokenType::Expire => "EXPIRE",
+        TokenType::Extended => "EXTENDED",
+        TokenType::FaultsSym => "FAULTS",
+        TokenType::Fields => "FIELDS",
+        TokenType::File => "FILE",
+        TokenType::First => "FIRST",
+        TokenType::Fixed => "FIXED",
+        TokenType::Flush => "FLUSH",
+        TokenType::Following => "FOLLOWING",
+        TokenType::Format => "FORMAT",
+        TokenType::Full => "FULL",
+        TokenType::Function => "FUNCTION",
+        TokenType::General => "GENERAL",
+        TokenType::Global => "GLOBAL",
+        TokenType::Grants => "GRANTS",
+        TokenType::Hash => "HASH",
+        TokenType::Help => "HELP",
+        TokenType::Histogram => "HISTOGRAM",
+        TokenType::History => "HISTORY",
+        TokenType::Hosts => "HOSTS",
+        TokenType::Hour => "HOUR",
+        TokenType::Identified => "IDENTIFIED",
+        TokenType::IdentSQLErrors => "ERRORS",
+        TokenType::ImportKwd => "IMPORT",
+        TokenType::Imports => "IMPORTS",
+        TokenType::Increment => "INCREMENT",
+        TokenType::Incremental => "INCREMENTAL",
+        TokenType::Indexes => "INDEXES",
+        TokenType::InsertMethod => "INSERT_METHOD",
+        TokenType::Instance => "INSTANCE",
+        TokenType::Invisible => "INVISIBLE",
+        TokenType::Invoker => "INVOKER",
+        TokenType::Io => "IO",
+        TokenType::Ipc => "IPC",
+        TokenType::Isolation => "ISOLATION",
+        TokenType::Issuer => "ISSUER",
+        TokenType::Json => "JSON",
+        TokenType::KeyBlockSize => "KEY_BLOCK_SIZE",
+        TokenType::Labels => "LABELS",
+        TokenType::Language => "LANGUAGE",
+        TokenType::Last => "LAST",
+        TokenType::LastBackup => "LAST_BACKUP",
+        TokenType::Lastval => "LASTVAL",
+        TokenType::Less => "LESS",
+        TokenType::Level => "LEVEL",
+        TokenType::List => "LIST",
+        TokenType::Local => "LOCAL",
+        TokenType::Locked => "LOCKED",
+        TokenType::Location => "LOCATION",
+        TokenType::Logs => "LOGS",
+        TokenType::Master => "MASTER",
+        TokenType::MaxIdxnum => "MAX_IDXNUM",
+        TokenType::MaxMinutes => "MAX_MINUTES",
+        TokenType::MaxConnectionsPerHour => "MAX_CONNECTIONS_PER_HOUR",
+        TokenType::MaxQueriesPerHour => "MAX_QUERIES_PER_HOUR",
+        TokenType::MaxRows => "MAX_ROWS",
+        TokenType::MaxUpdatesPerHour => "MAX_UPDATES_PER_HOUR",
+        TokenType::MaxUserConnections => "MAX_USER_CONNECTIONS",
+        TokenType::Mb => "MB",
+        TokenType::Memory => "MEMORY",
+        TokenType::Merge => "MERGE",
+        TokenType::Microsecond => "MICROSECOND",
+        TokenType::MinRows => "MIN_ROWS",
+        TokenType::Minute => "MINUTE",
+        TokenType::MinValue => "MINVALUE",
+        TokenType::Mode => "MODE",
+        TokenType::Modify => "MODIFY",
+        TokenType::Month => "MONTH",
+        TokenType::Names => "NAMES",
+        TokenType::National => "NATIONAL",
+        TokenType::Nchar => "NCHAR",
+        TokenType::Never => "NEVER",
+        TokenType::Next => "NEXT",
+        TokenType::Nextval => "NEXTVAL",
+        TokenType::No => "NO",
+        TokenType::Nocache => "NOCACHE",
+        TokenType::Nocycle => "NOCYCLE",
+        TokenType::Nodegroup => "NODEGROUP",
+        TokenType::Nomaxvalue => "NOMAXVALUE",
+        TokenType::Nominvalue => "NOMINVALUE",
+        TokenType::Nonclustered => "NONCLUSTERED",
+        TokenType::NoneType => "NONE",
+        TokenType::Nowait => "NOWAIT",
+        TokenType::Nvarchar => "NVARCHAR",
+        TokenType::Nulls => "NULLS",
+        TokenType::Off => "OFF",
+        TokenType::Offset => "OFFSET",
+        TokenType::OnDuplicate => "ON_DUPLICATE",
+        TokenType::Online => "ONLINE",
+        TokenType::Only => "ONLY",
+        TokenType::Open => "OPEN",
+        TokenType::Optional => "OPTIONAL",
+        TokenType::PackKeys => "PACK_KEYS",
+        TokenType::PageSym => "PAGE",
+        TokenType::Parser => "PARSER",
+        TokenType::Partial => "PARTIAL",
+        TokenType::Partitioning => "PARTITIONING",
+        TokenType::Partitions => "PARTITIONS",
+        TokenType::Password => "PASSWORD",
+        TokenType::PercentType => "PERCENT",
+        TokenType::PerDB => "PER_DB",
+        TokenType::PerTable => "PER_TABLE",
+        TokenType::Plugins => "PLUGINS",
+        TokenType::Policy => "POLICY",
+        TokenType::PreSplitRegions => "PRE_SPLIT_REGIONS",
+        TokenType::Preceding => "PRECEDING",
+        TokenType::Prepare => "PREPARE",
+        TokenType::Preserve => "PRESERVE",
+        TokenType::Privileges => "PRIVILEGES",
+        TokenType::Process => "PROCESS",
+        TokenType::Processlist => "PROCESSLIST",
+        TokenType::Profile => "PROFILE",
+        TokenType::Profiles => "PROFILES",
+        TokenType::Proxy => "PROXY",
+        TokenType::Purge => "PURGE",
+        TokenType::Quarter => "QUARTER",
+        TokenType::Queries => "QUERIES",
+        TokenType::Query => "QUERY",
+        TokenType::Quick => "QUICK",
+        TokenType::RateLimit => "RATE_LIMIT",
+        TokenType::Rebuild => "REBUILD",
+        TokenType::Recover => "RECOVER",
+        TokenType::Redundant => "REDUNDANT",
+        TokenType::Reload => "RELOAD",
+        TokenType::Remove => "REMOVE",
+        TokenType::Reorganize => "REORGANIZE",
+        TokenType::Repair => "REPAIR",
+        TokenType::Repeatable => "REPEATABLE",
+        TokenType::Replica => "REPLICA",
+        TokenType::Replicas => "REPLICAS",
+        TokenType::Replication => "REPLICATION",
+        TokenType::Required => "REQUIRED",
+        TokenType::Respect => "RESPECT",
+        TokenType::Restart => "RESTART",
+        TokenType::Restore => "RESTORE",
+        TokenType::Restores => "RESTORES",
+        TokenType::Resume => "RESUME",
+        TokenType::Reverse => "REVERSE",
+        TokenType::Role => "ROLE",
+        TokenType::Rollback => "ROLLBACK",
+        TokenType::Routine => "ROUTINE",
+        TokenType::RowCount => "ROW_COUNT",
+        TokenType::RowFormat => "ROW_FORMAT",
+        TokenType::Rtree => "RTREE",
+        TokenType::San => "SAN",
+        TokenType::Second => "SECOND",
+        TokenType::SecondaryEngine => "SECONDARY_ENGINE",
+        TokenType::SecondaryLoad => "SECONDARY_LOAD",
+        TokenType::SecondaryUnload => "SECONDARY_UNLOAD",
+        TokenType::Security => "SECURITY",
+        TokenType::SendCredentialsToTiKV => "SEND_CREDENTIALS_TO_TIKV",
+        TokenType::Separator => "SEPARATOR",
+        TokenType::Sequence => "SEQUENCE",
+        TokenType::Serial => "SERIAL",
+        TokenType::Serializable => "SERIALIZABLE",
+        TokenType::Session => "SESSION",
+        TokenType::Setval => "SETVAL",
+        TokenType::ShardRowIDBits => "SHARD_ROW_ID_BITS",
+        TokenType::Share => "SHARE",
+        TokenType::Shared => "SHARED",
+        TokenType::Shutdown => "SHUTDOWN",
+        TokenType::Signed => "SIGNED",
+        TokenType::Simple => "SIMPLE",
+        TokenType::Skip => "SKIP",
+        TokenType::SkipSchemaFiles => "SKIP_SCHEMA_FILES",
+        TokenType::Slave => "SLAVE",
+        TokenType::Slow => "SLOW",
+        TokenType::Snapshot => "SNAPSHOT",
+        TokenType::SomeType => "SOME",
+        TokenType::Source => "SOURCE",
+        TokenType::SqlBufferResult => "SQL_BUFFER_RESULT",
+        TokenType::SqlCache => "SQL_CACHE",
+        TokenType::SqlNoCache => "SQL_NO_CACHE",
+        TokenType::SqlTsiDay => "SQL_TSI_DAY",
+        TokenType::SqlTsiHour => "SQL_TSI_HOUR",
+        TokenType::SqlTsiMinute => "SQL_TSI_MINUTE",
+        TokenType::SqlTsiMonth => "SQL_TSI_MONTH",
+        TokenType::SqlTsiQuarter => "SQL_TSI_QUARTER",
+        TokenType::SqlTsiSecond => "SQL_TSI_SECOND",
+        TokenType::SqlTsiWeek => "SQL_TSI_WEEK",
+        TokenType::SqlTsiYear => "SQL_TSI_YEAR",
+        TokenType::Start => "START",
+        TokenType::StatsAutoRecalc => "STATS_AUTO_RECALC",
+        TokenType::StatsPersistent => "STATS_PERSISTENT",
+        TokenType::StatsSamplePages => "STATS_SAMPLE_PAGES",
+        TokenType::Status => "STATUS",
+        TokenType::Storage => "STORAGE",
+        TokenType::StrictFormat => "STRICT_FORMAT",
+        TokenType::Subject => "SUBJECT",
+        TokenType::Subpartition => "SUBPARTITION",
+        TokenType::Subpartitions => "SUBPARTITIONS",
+        TokenType::Super => "SUPER",
+        TokenType::Swaps => "SWAPS",
+        TokenType::SwitchesSym => "SWITCHES",
+        TokenType::System => "SYSTEM",
+        TokenType::SystemTime => "SYSTEM_TIME",
+        TokenType::TableChecksum => "TABLE_CHECKSUM",
+        TokenType::Tables => "TABLES",
+        TokenType::Tablespace => "TABLESPACE",
+        TokenType::Temporary => "TEMPORARY",
+        TokenType::Temptable => "TEMPTABLE",
+        TokenType::Text => "TEXT",
+        TokenType::Than => "THAN",
+        TokenType::TikvImporter => "TIKV_IMPORTER",
+        TokenType::Timestamp => "TIMESTAMP",
+        TokenType::Time => "TIME",
+        TokenType::Tp => "TYPE",
+        TokenType::Trace => "TRACE",
+        TokenType::Traditional => "TRADITIONAL",
+        TokenType::Transaction => "TRANSACTION",
+        TokenType::Triggers => "TRIGGERS",
+        TokenType::Truncate => "TRUNCATE",
+        TokenType::Unbounded => "UNBOUNDED",
+        TokenType::Uncommitted => "UNCOMMITTED",
+        TokenType::Undefined => "UNDEFINED",
+        TokenType::UnicodeSym => "UNICODE",
+        TokenType::Unknown => "UNKNOWN",
+        TokenType::User => "USER",
+        TokenType::Validation => "VALIDATION",
+        TokenType::Value => "VALUE",
+        TokenType::Variables => "VARIABLES",
+        TokenType::View => "VIEW",
+        TokenType::Visible => "VISIBLE",
+        TokenType::Warnings => "WARNINGS",
+        TokenType::Week => "WEEK",
+        TokenType::WeightString => "WEIGHT_STRING",
+        TokenType::Without => "WITHOUT",
+        TokenType::X509 => "X509",
+        TokenType::Year => "YEAR",
+        TokenType::Wait => "WAIT",
+        TokenType::AddDate => "ADDDATE",
+        TokenType::ApproxCountDistinct => "APPROX_COUNT_DISTINCT",
+        TokenType::ApproxPercentile => "APPROX_PERCENTILE",
+        TokenType::BitAnd => "BIT_AND",
+        TokenType::BitOr => "BIT_OR",
+        TokenType::BitXor => "BIT_XOR",
+        TokenType::Bound => "BOUND",
+        TokenType::Brief => "BRIEF",
+        TokenType::Cast => "CAST",
+        TokenType::CopyKwd => "COPY",
+        TokenType::Constraints => "CONSTRAINTS",
+        TokenType::CurTime => "CURTIME",
+        TokenType::DateAdd => "DATE_ADD",
+        TokenType::DateSub => "DATE_SUB",
+        TokenType::Dot => "DOT",
+        TokenType::Dump => "DUMP",
+        TokenType::Exact => "EXACT",
+        TokenType::ExprPushdownBlacklist => "EXPR_PUSHDOWN_BLACKLIST",
+        TokenType::Extract => "EXTRACT",
+        TokenType::Flashback => "FLASHBACK",
+        TokenType::Follower => "FOLLOWER",
+        TokenType::FollowerConstraints => "FOLLOWER_CONSTRAINTS",
+        TokenType::Followers => "FOLLOWERS",
+        TokenType::GetFormat => "GET_FORMAT",
+        TokenType::GroupConcat => "GROUP_CONCAT",
+        TokenType::NextRowID => "NEXT_ROW_ID",
+        TokenType::Inplace => "INPLACE",
+        TokenType::Instant => "INSTANT",
+        TokenType::Internal => "INTERNAL",
+        TokenType::JsonArrayagg => "JSON_ARRAYAGG",
+        TokenType::JsonObjectAgg => "JSON_OBJECTAGG",
+        TokenType::Leader => "LEADER",
+        TokenType::LeaderConstraints => "LEADER_CONSTRAINTS",
+        TokenType::Learner => "LEARNER",
+        TokenType::LearnerConstraints => "LEARNER_CONSTRAINTS",
+        TokenType::Learners => "LEARNERS",
+        TokenType::Min => "MIN",
+        TokenType::Max => "MAX",
+        TokenType::Now => "NOW",
+        TokenType::OptRuleBlacklist => "OPT_RULE_BLACKLIST",
+        TokenType::Placement => "PLACEMENT",
+        TokenType::Plan => "PLAN",
+        TokenType::Position => "POSITION",
+        TokenType::PrimaryRegion => "PRIMARY_REGION",
+        TokenType::Recent => "RECENT",
+        TokenType::Recreator => "RECREATOR",
+        TokenType::Running => "RUNNING",
+        TokenType::S3 => "S3",
+        TokenType::Schedule => "SCHEDULE",
+        TokenType::Staleness => "STALENESS",
+        TokenType::Std => "STD",
+        TokenType::Stddev => "STDDEV",
+        TokenType::StddevPop => "STDDEV_POP",
+        TokenType::StddevSamp => "STDDEV_SAMP",
+        TokenType::Stop => "STOP",
+        TokenType::Strict => "STRICT",
+        TokenType::Strong => "STRONG",
+        TokenType::SubDate => "SUBDATE",
+        TokenType::Sum => "SUM",
+        TokenType::Substring => "SUBSTRING",
+        TokenType::TimestampAdd => "TIMESTAMPADD",
+        TokenType::TimestampDiff => "TIMESTAMPDIFF",
+        TokenType::Tls => "TLS",
+        TokenType::TokudbDefault => "TOKUDB_DEFAULT",
+        TokenType::TokudbFast => "TOKUDB_FAST",
+        TokenType::TokudbLzma => "TOKUDB_LZMA",
+        TokenType::TokudbQuickLZ => "TOKUDB_QUICKLZ",
+        TokenType::TokudbSnappy => "TOKUDB_SNAPPY",
+        TokenType::TokudbSmall => "TOKUDB_SMALL",
+        TokenType::TokudbUncompressed => "TOKUDB_UNCOMPRESSED",
+        TokenType::TokudbZlib => "TOKUDB_ZLIB",
+        TokenType::Top => "TOP",
+        TokenType::Trim => "TRIM",
+        TokenType::Variance => "VARIANCE",
+        TokenType::VarPop => "VAR_POP",
+        TokenType::VarSamp => "VAR_SAMP",
+        TokenType::Verbose => "VERBOSE",
+        TokenType::Voter => "VOTER",
+        TokenType::VoterConstraints => "VOTER_CONSTRAINTS",
+        TokenType::Voters => "VOTERS",
+        _ => "",
+    }
 }

@@ -3,6 +3,11 @@ name = "mysql-parser-rs"
 version = "0.1.0"
 edition = "2021"
 
-# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
-
 [dependencies]
+lazy_static = "1.4.0"
+strum = "0.24"
+strum_macros = "0.24"
+
+[[bin]]
+name = "token_type_to_map_syntax"
+path = "tools/token_type_to_map_syntax.rs"
