@@ -46,7 +46,7 @@ pub enum TokenType {
     /// Literal
     Ident(String), // a~z, A~Z, 0~ 9
     NumberType(i64), // 0 ~ 9
-    BoolTYpe(bool),  // true or false
+    BoolType(bool),  // true or false
 
     /// Referenced pingcap/parser
     /// https://github.com/pingcap/parser/blob/master/parser.y

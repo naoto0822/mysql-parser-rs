@@ -1,6 +1,7 @@
 use crate::token_type::TokenType;
 use crate::token_type_map::KEYWORD_TOKEN_TYPE_MAP;
 
+pub const CHAR_ZERO_VALUE: char = 0 as char;
 pub const CHAR_EOF: char = '0';
 
 #[derive(Clone, Debug, PartialEq)]
@@ -13,7 +14,7 @@ impl Token {
         Self { token_type }
     }
 
-    pub fn lookup_indent(ident: String) -> TokenType {
+    pub fn lookup_ident(ident: String) -> TokenType {
         match KEYWORD_TOKEN_TYPE_MAP.get(ident.as_str()) {
             Some(v) => v.clone(),
             None => TokenType::Ident(ident),
@@ -39,12 +40,12 @@ mod tests_token {
     fn test_lookup_ident() {
         let in1 = "id".to_string();
         let want1 = TokenType::Ident("id".to_string());
-        let got1 = Token::lookup_indent(in1);
+        let got1 = Token::lookup_ident(in1);
         assert_eq!(want1, got1);
 
         let in2 = "SELECT".to_string();
         let want2 = TokenType::SelectKwd;
-        let got2 = Token::lookup_indent(in2);
+        let got2 = Token::lookup_ident(in2);
         assert_eq!(want2, got2);
     }
 }
