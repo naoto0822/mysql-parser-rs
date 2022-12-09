@@ -10,6 +10,10 @@ pub struct Token {
 }
 
 impl Token {
+    pub fn start_token() -> Self {
+        Self::new(TokenType::Start)
+    }
+
     pub fn new(token_type: TokenType) -> Self {
         Self { token_type }
     }

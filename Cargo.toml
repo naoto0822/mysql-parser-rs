@@ -11,3 +11,7 @@ strum_macros = "0.24"
 [[bin]]
 name = "token_type_to_map_syntax"
 path = "tools/token_type_to_map_syntax.rs"
+
+[[bin]]
+name = "example_parser"
+path = "examples/example_parser.rs"
