@@ -12,7 +12,7 @@ pub struct LexError {
 
 impl LexError {
     pub fn new(t: LexErrorType) -> Self {
-        Self {error_type: t}
+        Self { error_type: t }
     }
 
     pub fn invalid_char(c: String) -> Self {

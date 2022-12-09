@@ -53,4 +53,3 @@ pub enum InfixOp {
     Lt,
     Gt,
 }
-

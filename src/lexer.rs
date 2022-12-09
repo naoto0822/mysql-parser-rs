@@ -1,6 +1,6 @@
 use crate::error::LexError;
+use crate::token::{Token, CHAR_EOF, CHAR_ZERO_VALUE};
 use crate::token_type::TokenType;
-use crate::token::{Token, CHAR_ZERO_VALUE, CHAR_EOF};
 
 pub struct Lexer {
     query: String,
@@ -12,7 +12,6 @@ pub struct Lexer {
 }
 
 impl Lexer {
-
     pub fn new(query: String) -> Lexer {
         let query_length = query.chars().count();
 
@@ -68,7 +67,7 @@ impl Lexer {
                 } else {
                     Token::new(TokenType::EqOp)
                 }
-            },
+            }
             '>' => {
                 if self.peek_char() == '=' {
                     self.read_char();
@@ -79,7 +78,7 @@ impl Lexer {
                 } else {
                     Token::new(TokenType::GreaterOp)
                 }
-            },
+            }
             '[' => Token::new(TokenType::LeftBra),
             '{' => Token::new(TokenType::LeftBrace),
             '<' => {
@@ -91,7 +90,7 @@ impl Lexer {
                 } else {
                     Token::new(TokenType::LessOp)
                 }
-            },
+            }
             '(' => Token::new(TokenType::Lparen),
             '-' => Token::new(TokenType::Minus),
             '%' => Token::new(TokenType::Percent),
@@ -224,8 +223,8 @@ impl Lexer {
 
 #[cfg(test)]
 mod tests_lexer {
-    use crate::token::Token;
     use crate::lexer::Lexer;
+    use crate::token::Token;
     use crate::token_type::TokenType;
 
     #[test]
@@ -235,7 +234,7 @@ mod tests_lexer {
         let got1 = lexer.get_tokens();
         match got1 {
             Ok(v) => println!("{:?}", v),
-            Err(e) => println!("{:?}", e)
+            Err(e) => println!("{:?}", e),
         }
     }
 }
